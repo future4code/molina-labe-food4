@@ -1,8 +1,8 @@
 # 4Food 🥓 🍔 🍟 🌭 🍕
 
 # Trabalho feito pelo grupo:
-- Elaini Cristina
 - Bruno Moreira
+- Elaini Cristina
+- Joice Silva
+- Roberth Felicíssimo
 - Suzana Hessel
-- Roberth Felicíssimo 
-- Joice Silva 
