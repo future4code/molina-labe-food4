@@ -51,7 +51,7 @@ const Router = () => {
                     <CartPage />
                 </Route>
 
-                <Route exact path={""}>
+                <Route>
                     <ErrorPage />
                 </Route>
             </Switch>
