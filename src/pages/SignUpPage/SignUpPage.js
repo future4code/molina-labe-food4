@@ -1,12 +1,23 @@
 import React from 'react'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { 
+    ConteinerSingUpPage,
+    LogoSingUpPage,
+    TextConteinerSingUpPage
+} from './styled';
+import LogoPreta from '../../assets/Img/logoPreta.png'
+import SingUpForm from './singUpForm'
 
 const SignUpPage = () => {
     return (
-        <div>
-            <ChevronLeftIcon />
-            <h1>SignUpPage</h1>  
-        </div>
+        <ConteinerSingUpPage>
+
+            <LogoSingUpPage src={LogoPreta}  alt={"Logo Ifuture preta"} />
+
+            <TextConteinerSingUpPage>Cadastrar</TextConteinerSingUpPage>
+
+            <SingUpForm/>
+
+        </ConteinerSingUpPage>
     )
 }
 
