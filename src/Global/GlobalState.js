@@ -7,11 +7,9 @@ const GlobalState = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantDetail, setRestaurantDetail] = useState([]);
 
-
-
   useEffect(() => {
     getRestaurants();
-  }, []);
+  }, [])
 
   const getRestaurants = () => {
 
