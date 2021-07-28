@@ -9,24 +9,24 @@ const GlobalState = (props) => {
 
 
 
-  // useEffect(() => {
-  //   getRestaurants();
-  // }, []);
+  useEffect(() => {
+    getRestaurants();
+  }, []);
 
-  // const getRestaurants = () => {
+  const getRestaurants = () => {
 
-  //   axios
-  //     .get(`${BASE_URL}/fourFoodB/restaurants`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: localStorage.getItem("token"),
-  //       },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //     })
-  //     .catch((error) => console.log(error.message));
-  // };
+    axios
+      .get(`${BASE_URL}/fourFoodB/restaurants`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error.message));
+  };
 
   const getRestaurantDetail = (id) => {
     axios
@@ -96,7 +96,7 @@ const GlobalState = (props) => {
   const states = { restaurants, restaurantDetail };
   const setters = { setRestaurants, setRestaurantDetail };
   const requests = {
-    // getRestaurants,
+    getRestaurants,
     getRestaurantDetail,
     getFullAddress,
     getProfile,
