@@ -3,6 +3,7 @@ import theme from "./constants/theme";
 import Router from "./routes/Router";
 import GlobalState from "./Global/GlobalState";
 import { ThemeProvider } from "@material-ui/core/styles";
+import GlobalState from "./Global/GlobalState"
 
 function App() {
   return (
