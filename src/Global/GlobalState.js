@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL } from "../constants/urls";
 import GlobalStateContext from "./GlobalStateContext";
@@ -8,20 +8,25 @@ const GlobalState = (props) => {
   const [restaurantDetail, setRestaurantDetail] = useState([]);
 
 
-  const getRestaurants = () => {
 
-    axios
-      .get(`${BASE_URL}/fourFoodB/restaurants`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => console.log(error.message));
-  };
+  // useEffect(() => {
+  //   getRestaurants();
+  // }, []);
+
+  // const getRestaurants = () => {
+
+  //   axios
+  //     .get(`${BASE_URL}/fourFoodB/restaurants`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: localStorage.getItem("token"),
+  //       },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //     })
+  //     .catch((error) => console.log(error.message));
+  // };
 
   const getRestaurantDetail = (id) => {
     axios
@@ -91,7 +96,7 @@ const GlobalState = (props) => {
   const states = { restaurants, restaurantDetail };
   const setters = { setRestaurants, setRestaurantDetail };
   const requests = {
-    getRestaurants,
+    // getRestaurants,
     getRestaurantDetail,
     getFullAddress,
     getProfile,

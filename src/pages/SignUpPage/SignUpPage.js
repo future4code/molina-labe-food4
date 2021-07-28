@@ -1,4 +1,5 @@
 import React from 'react'
+import useUnprotectedPage from '../../hooks/useUnProtect';
 import { 
     ConteinerSingUpPage,
     LogoSingUpPage,
@@ -8,6 +9,7 @@ import LogoPreta from '../../assets/Img/logoPreta.png'
 import SingUpForm from './singUpForm'
 
 const SignUpPage = () => {
+    useUnprotectedPage()
     return (
         <ConteinerSingUpPage>
 

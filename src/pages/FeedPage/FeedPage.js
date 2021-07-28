@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
-
+import useProtectedPage from "../../hooks/useProtectedPage";
 import { alpha, makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
@@ -89,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FeedPage = () => {
+  useProtectedPage()
   const classes = useStyles();
 
   return (

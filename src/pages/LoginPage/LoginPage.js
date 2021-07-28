@@ -11,6 +11,7 @@ import {
     ConteinerInput,
     LogoLoginPage 
 } from './styled';
+import useUnprotectedPage from '../../hooks/useUnProtect';
 import useForm from '../../hooks/useForm'
 import { login } from '../../services/user';
 import { useHistory } from 'react-router';
@@ -20,7 +21,7 @@ import theme from "../../constants/theme";
 
 const LoginPage = () => {
     const [form, handleInputChange, clean] = useForm({email: "", password:""})
-    
+    useUnprotectedPage()
     const history = useHistory()
 
     const onSubmitForm = (e) => {
