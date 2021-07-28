@@ -1,34 +1,54 @@
 import React from "react";
 import CreateIcon from "@material-ui/icons/Create";
-import { Card, LinearProgress } from "@material-ui/core";
-// import { ThemeProvider } from "@material-ui/core";
-// import  theme  from "../../constants/theme";
+// import { LinearProgress } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
+import {
+  ContainerOrderHistory,
+  Orders,
+  TitleProfile,
+  ContainerProfile,
+  ContainerProfileEdit,
+  BoxUser,
+  BoxAddress,
+  Icon,
+  User,
+} from "./styled";
 
 const ProfilePage = () => {
   return (
-    <div>
-      <h1>Meu Perfil</h1>
-      <p>
-        <LinearProgress color="secondary" />
-      </p>
-      <Card variant="outlined">
-        <p>Nome</p>
-        <p>e-mail</p>
-        <p>cpf</p>
-        <CreateIcon />
-      </Card>
-      <Card variant="outlined">
-        <p>Endereço Cadastrado</p>
-        {/* <p>Rua, numero - cidade</p> */}
-        <CreateIcon />
-      </Card>
-      <h2>Histórico de Pedidos</h2>
-      <p>
+    <ContainerProfile>
+      <ContainerProfileEdit>
+      <TitleProfile>
+        <h3>Meu perfil</h3>
+      </TitleProfile>
+      <Divider variant="outlined" />
+      <BoxUser>
+        <button>
+          <User>
+          <p>Nome</p>
+          <p>e-mail</p>
+          <p>cpf</p>
+          </User>
+          <Icon><CreateIcon/></Icon>
+        </button>
+      </BoxUser>
+      <BoxAddress>
+        <button>
+          <p>Endereço Cadastrado</p>
+          <Icon><CreateIcon/></Icon>
+        </button>
+      </BoxAddress>
+      <ContainerOrderHistory>
+        <h3>Histórico de Pedidos</h3>
+        {/* <p>
           <LinearProgress color="secondary" />
-        </p>
-      <div>Pedido 1</div>
-      <div>Pedido 2</div>
-    </div>
+        </p> */}
+        <Orders>
+       <p>Você não realizou nenhum pedido</p>
+       </Orders>
+      </ContainerOrderHistory>
+      </ContainerProfileEdit>
+    </ContainerProfile>
   );
 };
 
