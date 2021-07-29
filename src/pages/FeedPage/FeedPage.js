@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { GlobalFeedPageContainer, FeedPageContainer } from "./styled";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import AppBar from "@material-ui/core/AppBar";
@@ -11,6 +11,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import { alpha, makeStyles } from "@material-ui/core/styles";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
+import GlobalStateContext from "../../Global/GlobalStateContext";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -89,7 +90,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FeedPage = () => {
+  const { states, requests } = useContext(GlobalStateContext);
   const classes = useStyles();
+
+  useEffect(() => {
+    requests.getRestaurants();
+  }, []);
 
   return (
     <GlobalFeedPageContainer>
@@ -114,12 +120,10 @@ const FeedPage = () => {
             </Toolbar>
           </AppBar>
         </div>
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
-        <RestaurantCard />
+        {states.restaurants &&
+          states.restaurants.map((restaurant) => {
+            return <RestaurantCard restaurant={restaurant} />;
+          })}
         <div className={classes.sectionBar}>
           <AppBar position="static" color="black">
             <Toolbar>
