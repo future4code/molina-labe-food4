@@ -64,3 +64,24 @@ export const ConteinerInput = styled.div `
     }
 
 `
+export const ConteinerInputSenha = styled.div ` 
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    padding: 20px;
+    margin: auto;
+    justify-content: space-around;
+
+    input{
+        color: black;
+    }
+
+`
+
+export const ButtonLogin = styled.button ` 
+    color: black;
+    background-color: transparent;
+    border: none;
+    margin-top: 20px;
+    margin-left: 20px;
+`
