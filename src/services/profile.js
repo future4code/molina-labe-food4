@@ -1,8 +1,8 @@
 import { BASE_URL, headers } from "../constants/urls";
 import axios from "axios";
+import { goToProfile } from "../routes/Cordinator";
 
-
-export const addOrEditAdress = (body) => {
+export const addOrEditAdress = (body, clear, history) => {
     console.log("BODY", body);
   
     axios
@@ -11,15 +11,15 @@ export const addOrEditAdress = (body) => {
       })
       .then((res) => {
         console.log(res);
+        clear()
+        goToProfile(history)
       })
       .catch((err) => {
         console.log(err);
       });
   };
   
-
-  
-export const updateProfile = (body) => {
+export const updateProfile = (body, clear, history) => {
     console.log("BODY", body);
   
     axios
@@ -28,6 +28,8 @@ export const updateProfile = (body) => {
       })
       .then((res) => {
         console.log(res);
+        clear()
+        goToProfile(history)
       })
       .catch((err) => {
         console.log(err);

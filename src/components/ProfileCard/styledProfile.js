@@ -26,9 +26,7 @@ export const ContainerProfileEdit = styled.div`
 `;
 export const TitleProfile = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  
   
   h3 {
     /* position: relative;
@@ -38,8 +36,6 @@ export const TitleProfile = styled.div`
     font-weight: normal;
   }
 `;
-
-export const User = styled.div``;
 
 export const Icon = styled.div`
   margin-right: 15px;
@@ -54,7 +50,6 @@ export const BoxUser = styled.div`
   button {
     display: flex;
     align-items: center;
-    flex-direction: column;
     justify-content: space-between;
     color: black;
     width: 100vw;
@@ -71,6 +66,14 @@ export const BoxUser = styled.div`
     font-weight: normal;
     margin: 10px;
   }
+`;
+
+export const User = styled.div`
+display: flex;
+flex-direction: column;
+justify-items: start;
+gap: 10px;
+
 `;
 
 export const BoxAddress = styled.div`

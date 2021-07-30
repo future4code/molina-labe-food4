@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {goToFeed, goToAddress} from '../routes/Cordinator'
-import { BASE_URL, headers } from "../constants/urls";
+import { BASE_URL} from "../constants/urls";
 
 
 export const login = (body, clean,history) => {
@@ -35,10 +35,12 @@ export const singUp = (body, clean, history) => {
 
 export const SignUpAddressPage = (body, clean, history) => {
     axios.put(`${BASE_URL}/fourFoodB/address`, body, {
-        headers: headers,
+        "headers": {
+            "Content-Type": "application/json"
+        }
 
     }).then((res) =>{
-        localStorage.setItem("token", res.data.token)
+        console.log(res)
         goToFeed(history)
     }).catch((err) =>{
         alert(err.response.data.message)
