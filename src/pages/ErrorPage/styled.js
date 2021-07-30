@@ -5,14 +5,14 @@ export const ConteinerErroPage = styled.div `
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    background-color: #B8B8B8;
+    background-color: #000000;
    
 @media(max-width: 480px) {
     margin: 0;
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    background-color: #B8B8B8;
+    background-color: #000000;
     overflow: scroll;
 }
 
@@ -22,13 +22,13 @@ export const ConteinerErroPage = styled.div `
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    background-color: #B8B8B8;
+    background-color: #000000;
 }
 `
 
 export const TextConteinerPageErro = styled.h1 ` 
     font-family: 'ROBOTO';
-    color: #000000;
+    color: #B8B8B8;
     text-align: center;
     margin-top: 150px;
     font: 16px;
