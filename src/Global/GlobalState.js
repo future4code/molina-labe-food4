@@ -6,22 +6,21 @@ import GlobalStateContext from "./GlobalStateContext";
 const GlobalState = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantDetail, setRestaurantDetail] = useState([]);
-
+  
   useEffect(() => {
     getRestaurants();
   }, [])
 
   const getRestaurants = () => {
-
     axios
       .get(`${BASE_URL}/fourFoodB/restaurants`, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
+          auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImF1SVlLVk5JRnNUZ25TM2dnV2t2IiwibmFtZSI6IkEiLCJlbWFpbCI6IkFAZ21haWwuY29tIiwiY3BmIjoiMTIzLjEyMy4xMjMuNDQiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQXVndXN0YSwgNjMsIGFwIDAyIC0gSmFyZGltIGRvIE1hciIsImlhdCI6MTYyNzUyMzA1Mn0.5ok2fkCKudX43WmV1RmJZGz7fN8XDkqzXQHXZgANU-s",
         },
       })
       .then((res) => {
-        console.log(res.data);
+        setRestaurants(res.data.restaurants);
       })
       .catch((error) => console.log(error.message));
   };
