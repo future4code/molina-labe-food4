@@ -18,9 +18,7 @@ const SignUpPage = () => {
     useUnprotectedPage()
     return (
         <ConteinerSingUpPage>
-
-            <ButtonLogin onClick={()=> goToLogin(history)} ><ArrowBackIosIcon/></ButtonLogin>
-
+       <ButtonLogin onClick={()=> goToLogin(history)} ><ArrowBackIosIcon/></ButtonLogin>
             <LogoSingUpPage src={LogoPreta}  alt={"Logo Ifuture preta"} />
 
             <TextConteinerSingUpPage>Cadastrar</TextConteinerSingUpPage>

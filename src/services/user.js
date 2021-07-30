@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { BASE_URL } from '../constants/urls'
-import {goToFeed} from '../routes/Cordinator'
+import {goToFeed, goToAddress} from '../routes/Cordinator'
+import { BASE_URL, headers } from "../constants/urls";
+
 
 export const login = (body, clean,history) => {
     axios.post(` ${BASE_URL}/fourFoodB/login`, body, {
@@ -17,7 +18,7 @@ export const login = (body, clean,history) => {
     })
 }
 
-export const singUp = (body, clean,history) => {
+export const singUp = (body, clean, history) => {
     axios.post(` ${BASE_URL}/fourFoodB/signup`, body, {
         "headers": {
             "Content-Type": "application/json"
@@ -25,9 +26,21 @@ export const singUp = (body, clean,history) => {
     }).then((res) => {
         localStorage.setItem("token", res.data.token)
         clean()
-        goToFeed(history)
+        goToAddress(history)
     }).catch((err) => {
         alert(err.response.data.message)
 
+    })
+}
+
+export const SignUpAddressPage = (body, clean, history) => {
+    axios.put(`${BASE_URL}/fourFoodB/address`, body, {
+        headers: headers,
+
+    }).then((res) =>{
+        localStorage.setItem("token", res.data.token)
+        goToFeed(history)
+    }).catch((err) =>{
+        alert(err.response.data.message)
     })
 }

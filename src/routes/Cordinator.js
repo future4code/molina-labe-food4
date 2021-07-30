@@ -10,6 +10,10 @@ export const goToSignup = (history) => {
   history.push("/cadastro");
 };
 
+export const goToAddress =(history) => {
+  history.push("/cadastro-endereco")
+}
+
 export const goToFeed = (history) => {
   history.push("/feed");
 };

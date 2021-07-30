@@ -10,6 +10,7 @@ import ProfilePageAddress from "../pages/ProfilePage/ProfilePageAddress";
 import CartPage from "../pages/CartPage.js/CartPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import HomePage from "../pages/HomePage/HomePage";
+import SignUpAddressPage from "../pages/SignUpAddressPage/SignUpAddressPage";
 
 const Router = () => {
   return (
@@ -25,6 +26,10 @@ const Router = () => {
 
         <Route exact path={"/cadastro"}>
           <SignUpPage />
+        </Route>
+
+        <Route exact path={"/cadastro-endereco"}>
+          <SignUpAddressPage />
         </Route>
 
         <Route exact path={"/feed"}>
