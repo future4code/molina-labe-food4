@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Divider, TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core";
 import theme from "../../constants/theme";
+import useForm from "../../hooks/useForm";
+import {addOrEditAdress} from "../../services/profile"
+import  { useHistory } from "react-router-dom";
+import { goToProfile } from "../../routes/Cordinator";
 import {
   ContainerProfileAddres,
   ContainerAddres,
@@ -14,14 +18,30 @@ import {
 import { ChevronLeft } from "@material-ui/icons";
 
 const ProfilePageAddress = () => {
+  const [ form, onChange, clear ] = useForm({
+    street: "",
+    number: "",
+    neighbourhood: "",
+    city: "",
+    state: "",
+    apartment: "",
+  });
+  
+  const history = useHistory()
+
+  const onClickEditAddress = () => {
+    addOrEditAdress(form, clear);
+    goToProfile(history)
+  };
   return (
     <ContainerProfileAddres>
+
       <Header>
-      <ArrowLeft>
-            <Button>
-              <ChevronLeft />
-            </Button>
-          </ArrowLeft>
+        <ArrowLeft>
+          <Button>
+            <ChevronLeft  onClick={() => goToProfile(history)} />
+          </Button>
+        </ArrowLeft>
         <Title>
           <h3>Endereço</h3>
         </Title>
@@ -29,11 +49,11 @@ const ProfilePageAddress = () => {
       <Divider variant="outlined" />
       <ContainerAddres>
         <ThemeProvider theme={theme}>
-          <form id={"addres_form"}>
+          <form onSubmit={onClickEditAddress}>
             <TextField
-              // value={form.street}
-              name={"street"}
-              // onChange={handleInput}
+             name={"street"}
+              value={form.street}
+              onChange={onChange}
               label="Logradouro"
               placeholder="Rua / Av."
               type={"text"}
@@ -44,9 +64,9 @@ const ProfilePageAddress = () => {
               autoFocus
             />
             <TextField
-              // value={form.number}
+              value={form.number}
               name={"number"}
-              // onChange={handleInput}
+              onChange={onChange}
               label="Número"
               placeholder="Número"
               type={"number"}
@@ -56,9 +76,9 @@ const ProfilePageAddress = () => {
               required
             />
             <TextField
-              // value={form.neighbourhood}
+              value={form.neighbourhood}
               name={"neighbourhood"}
-              // onChange={handleInput}
+              onChange={onChange}
               label="Bairro"
               placeholder="Bairro"
               type={"text"}
@@ -68,9 +88,9 @@ const ProfilePageAddress = () => {
               required
             />
             <TextField
-              // value={form.city}
+              value={form.city}
               name={"city"}
-              // onChange={handleInput}
+              onChange={onChange}
               label="Cidade"
               placeholder="Cidade"
               type={"text"}
@@ -80,9 +100,9 @@ const ProfilePageAddress = () => {
               required
             />
             <TextField
-              // value={form.state}
+              value={form.state}
               name={"state"}
-              // onChange={handleInput}
+              onChange={onChange}
               label="Estado"
               placeholder="Estado"
               type={"text"}
@@ -92,9 +112,9 @@ const ProfilePageAddress = () => {
               required
             />
             <TextField
-              // value={form.complement}
-              name={"complement"}
-              // onChange={handleInput}
+              value={form.apartment}
+              name={"apartment"}
+              onChange={onChange}
               label="Complemento"
               placeholder="Apto. / Bloco"
               type={"text"}
@@ -106,7 +126,7 @@ const ProfilePageAddress = () => {
               <Button
                 variant={"contained"}
                 type={"submit"}
-                // onClick={createAddres}
+                onClick={onClickEditAddress}
                 fullWidth
               >
                 Salvar

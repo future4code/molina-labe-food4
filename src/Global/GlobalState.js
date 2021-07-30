@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BASE_URL } from "../constants/urls";
+import { BASE_URL, headers } from "../constants/urls";
 import GlobalStateContext from "./GlobalStateContext";
 
 const GlobalState = (props) => {
   const [restaurants, setRestaurants] = useState([]);
   const [restaurantDetail, setRestaurantDetail] = useState([]);
-  
+  const [user, setUser] = useState({});
+  const [address, setAddress] = useState({});
+
+
   useEffect(() => {
     getRestaurants();
   }, [])
@@ -39,30 +42,36 @@ const GlobalState = (props) => {
   };
 
   const getFullAddress = () => {
+    console.log("HEADERS", headers);
     axios
       .get(`${BASE_URL}/fourFoodB/profile/address`, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
+        headers: headers,
       })
       .then((response) => {
-        console.log(response);
+        console.log("ADDRESSSS AQUIIII", response);
+        setAddress(response.data.address)
+        
+      })
+      .catch((error) => 
+      console.log(error),
+      // alert("Endereço não adicionado, por favor tente novamente"),
+      
+      );
+  };
+
+  const getProfile = () => {
+    console.log("headers", headers);
+    axios
+      .get(`${BASE_URL}/fourFoodB/profile`, {
+        headers: headers,
+      })
+      .then((response) => {
+        console.log(response.data.user);
+        setUser(response.data.user);
       })
       .catch((error) => console.log(error.message));
   };
 
-  const getProfile = () => {
-    axios
-      .get(`${BASE_URL}/fourFoodB/profile`, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => console.log(error.message));
-  };
 
   const getActiveOrder = () => {
     axios
@@ -90,8 +99,8 @@ const GlobalState = (props) => {
       .catch((error) => console.log(error.message));
   };
 
-  const states = { restaurants, restaurantDetail };
-  const setters = { setRestaurants, setRestaurantDetail };
+  const states = { restaurants, restaurantDetail, user, address };
+  const setters = { setRestaurants, setRestaurantDetail, setUser, setAddress };
   const requests = {
     getRestaurants,
     getRestaurantDetail,

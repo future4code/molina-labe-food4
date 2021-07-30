@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Divider, TextField } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core";
 import theme from "../../constants/theme";
+import useForm from "../../hooks/useForm";
+import { updateProfile } from "../../services/profile";
 import { ChevronLeft } from "@material-ui/icons";
 import {
   ContainerProfileUser,
@@ -12,16 +14,31 @@ import {
   Title,
   HeaderUser,
 } from "./styled";
+import { useHistory } from "react-router-dom";
+import { goToEditAddress, goToProfile } from "../../routes/Cordinator";
 
 const ProfilePageUser = () => {
+  const [ form, onChange, clear ] = useForm({
+    name: "",
+    email: "",
+    cpf: "",
+  });
+
+  const history = useHistory()
+
+  const onClickUpdateProfile = () => {
+    updateProfile(form, clear);
+    goToProfile(history)
+  };
+
   return (
     <ContainerProfileUser>
-       <HeaderUser>
-      <ArrowLeftUser>
-            <Button>
-              <ChevronLeft />
-            </Button>
-          </ArrowLeftUser>
+      <HeaderUser>
+        <ArrowLeftUser>
+          <Button>
+            <ChevronLeft onClick={() => goToEditAddress(history)} />
+          </Button>
+        </ArrowLeftUser>
         <Title>
           <h3>Editar</h3>
         </Title>
@@ -29,11 +46,11 @@ const ProfilePageUser = () => {
       <Divider variant="outlined" />
       <ContainerUser>
         <ThemeProvider theme={theme}>
-          <form id={"addres_form"}>
+          <form onSubmit={onClickUpdateProfile}>
             <TextField
-              // value={form.name}
-              name={"name"}
-              // onChange={handleInput}
+              value={form.name}
+              name="name"
+              onChange={onChange}
               label="Nome"
               placeholder="Nome"
               type={"text"}
@@ -44,9 +61,9 @@ const ProfilePageUser = () => {
               autoFocus
             />
             <TextField
-              // value={form.email}
+              value={form.email}
               name={"email"}
-              // onChange={handleInput}
+              onChange={onChange}
               label="Email"
               placeholder="Email"
               type={"text"}
@@ -56,9 +73,9 @@ const ProfilePageUser = () => {
               required
             />
             <TextField
-              // value={form.cpf}
+              value={form.cpf}
               name={"cpf"}
-              // onChange={handleInput}
+              onChange={onChange}
               label="CPF"
               placeholder="Cpf"
               type={"number"}
@@ -71,7 +88,7 @@ const ProfilePageUser = () => {
               <Button
                 variant={"contained"}
                 type={"submit"}
-                // onClick={createUser}
+                onClick={onClickUpdateProfile}
                 fullWidth
               >
                 Salvar

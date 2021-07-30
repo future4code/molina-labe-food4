@@ -12,7 +12,7 @@ const AddressForm = () => {
 
     const history = useHistory()
 
-    const [form, handleInputChange, clean] = useForm({ street: "", number: "", neighbourhood: "", city: "", state: "", complement: "" })
+    const [form, onChange, clean] = useForm({ street: "", number: "", neighbourhood: "", city: "", state: "", complement: "" })
     
     const onSubmitForm = (e) => {
         e.preventDefault()
@@ -31,7 +31,7 @@ const AddressForm = () => {
                     <TextField
                         name={"street"}
                         value={form.street}
-                        onChange={handleInputChange}
+                        onChange={onChange}
                         label={"logradouro"}
                         variant={"outlined"}
                         fullWidth
@@ -46,7 +46,7 @@ const AddressForm = () => {
                     <TextField
                         name={"number"}
                         value={form.number}
-                        onChange={handleInputChange}
+                        onChange={onChange}
                         label={"numero"}
                         variant={"outlined"}
                         fullWidth
@@ -62,7 +62,7 @@ const AddressForm = () => {
                     <TextField
                         name={"neighbourhood"}
                         value={form.neighbourhood}
-                        onChange={handleInputChange}
+                        onChange={onChange}
                         label={"Bairro"}
                         variant={"outlined"}
                         fullWidth
@@ -79,7 +79,7 @@ const AddressForm = () => {
                     <TextField
                         name={"city"}
                         value={form.city}
-                        onChange={handleInputChange}
+                        onChange={onChange}
                         label={"Cidade"}
                         variant={"outlined"}
                         fullWidth
@@ -96,7 +96,7 @@ const AddressForm = () => {
                     <TextField
                         name={"state"}
                         value={form.state}
-                        onChange={handleInputChange}
+                        onChange={onChange}
                         label={"Estado"}
                         variant={"outlined"}
                         fullWidth
@@ -112,7 +112,7 @@ const AddressForm = () => {
                     <TextField
                         name={"complement"}
                         value={form.complement}
-                        onChange={handleInputChange}
+                        onChange={onChange}
                         label={"Complemento"}
                         variant={"outlined"}
                         fullWidth
