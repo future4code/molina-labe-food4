@@ -10,7 +10,7 @@ import SingUpForm from './singUpForm'
 const SignUpPage = () => {
     return (
         <ConteinerSingUpPage>
-
+            
             <LogoSingUpPage src={LogoPreta}  alt={"Logo Ifuture preta"} />
 
             <TextConteinerSingUpPage>Cadastrar</TextConteinerSingUpPage>
