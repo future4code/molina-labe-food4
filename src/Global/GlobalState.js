@@ -8,22 +8,20 @@ const GlobalState = (props) => {
   const [restaurantDetail, setRestaurantDetail] = useState([]);
   const [user, setUser] = useState({});
   const [address, setAddress] = useState({});
-
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   useEffect(() => {
     getRestaurants();
-  }, [])
+  }, []);
 
   const getRestaurants = () => {
     axios
       .get(`${BASE_URL}/fourFoodB/restaurants`, {
-        headers: {
-          "Content-Type": "application/json",
-          auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImF1SVlLVk5JRnNUZ25TM2dnV2t2IiwibmFtZSI6IkEiLCJlbWFpbCI6IkFAZ21haWwuY29tIiwiY3BmIjoiMTIzLjEyMy4xMjMuNDQiLCJoYXNBZGRyZXNzIjp0cnVlLCJhZGRyZXNzIjoiUi4gQXVndXN0YSwgNjMsIGFwIDAyIC0gSmFyZGltIGRvIE1hciIsImlhdCI6MTYyNzUyMzA1Mn0.5ok2fkCKudX43WmV1RmJZGz7fN8XDkqzXQHXZgANU-s",
-        },
+        headers: headers,
       })
       .then((res) => {
         setRestaurants(res.data.restaurants);
+        setFilteredRestaurants(res.data.restaurants);
       })
       .catch((error) => console.log(error.message));
   };
@@ -31,12 +29,11 @@ const GlobalState = (props) => {
   const getRestaurantDetail = (id) => {
     axios
       .get(`${BASE_URL}/fourFoodB/restaurants/${id}`, {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
+        headers: headers,
       })
       .then((response) => {
         console.log(response);
+        setRestaurantDetail(response.restaurant.products);
       })
       .catch((error) => console.log(error.message));
   };
@@ -49,13 +46,11 @@ const GlobalState = (props) => {
       })
       .then((response) => {
         console.log("ADDRESSSS AQUIIII", response);
-        setAddress(response.data.address)
-        
+        setAddress(response.data.address);
       })
-      .catch((error) => 
-      console.log(error),
-      // alert("Endereço não adicionado, por favor tente novamente"),
-      
+      .catch(
+        (error) => console.log(error)
+        // alert("Endereço não adicionado, por favor tente novamente"),
       );
   };
 
@@ -71,7 +66,6 @@ const GlobalState = (props) => {
       })
       .catch((error) => console.log(error.message));
   };
-
 
   const getActiveOrder = () => {
     axios
@@ -99,8 +93,20 @@ const GlobalState = (props) => {
       .catch((error) => console.log(error.message));
   };
 
-  const states = { restaurants, restaurantDetail, user, address };
-  const setters = { setRestaurants, setRestaurantDetail, setUser, setAddress };
+  const states = {
+    restaurants,
+    restaurantDetail,
+    user,
+    address,
+    filteredRestaurants,
+  };
+  const setters = {
+    setRestaurants,
+    setRestaurantDetail,
+    setUser,
+    setAddress,
+    setFilteredRestaurants,
+  };
   const requests = {
     getRestaurants,
     getRestaurantDetail,
