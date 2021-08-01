@@ -50,62 +50,16 @@ const useStyles = makeStyles((theme) => ({
 const FeedPage = () => {
   const { states, setters, requests } = useContext(GlobalStateContext);
   const [search, setSearch] = useState("");
-  // const [filteredRestaurantsList, setFilteredRestaurantsList] = useState([]);
-  // const [section, setSection] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
-    // requests.getRestaurants();
     filterRestaurants();
-    // changeSection();
   }, [search]);
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  // const changeSection = () => {
-  //   if (filteredRestaurantsList === []) {
-  //     setFilteredRestaurantsList(states.restaurants);
-  //   } else {
-  //     return filteredRestaurantsList;
-  //   }
-  // };
-
-  // const renderFeedPage = () => {
-  //   switch (filteredRestaurantsList) {
-  //     case []:
-  //       return states.restaurants.map((restaurant) => {
-  //         return <RestaurantCard restaurant={restaurant} />;
-  //       });
-  //     case [search]:
-  //       return filteredRestaurantsList.map((restaurant) => {
-  //         return <RestaurantCard restaurant={restaurant} />;
-  //       });
-  //   }
-  // };
-
-  // const filterRestaurants = () => {
-  //   const newRestaurantsList = states.restaurants.filter((restaurant) => {
-  //     const restaurantName = restaurant.name.toLowerCase();
-  //     const searchText = search.toLocaleLowerCase();
-  //     return search ? restaurantName.startsWith(searchText) : true;
-  //   });
-
-  //   setters.setFilteredRestaurants(newRestaurantsList);
-  // };
-
-  // const getFilteredRestaurants = () => {
-  //   return states.filteredRestaurants
-  //     .filter((restaurant) =>
-  //       search ? restaurant.name.startsWith(search) : true
-  //     )
-  //     .map((restaurant) => {
-  //       return restaurantName.startsWith(searchText);
-  //     });
-  // };
-
-  // const NewRestaurantsList = getFilteredRestaurants();
   const filterRestaurants = () => {
     const newRestaurantsList = states.restaurants.filter((restaurant) => {
       const restaurantName = restaurant.name.toLowerCase();
