@@ -8,7 +8,6 @@ const GlobalState = (props) => {
   const [restaurantDetail, setRestaurantDetail] = useState([]);
   const [user, setUser] = useState({});
   const [address, setAddress] = useState({});
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   useEffect(() => {
     getRestaurants();
@@ -21,7 +20,6 @@ const GlobalState = (props) => {
       })
       .then((res) => {
         setRestaurants(res.data.restaurants);
-        setFilteredRestaurants(res.data.restaurants);
       })
       .catch((error) => console.log(error.message));
   };
@@ -98,14 +96,12 @@ const GlobalState = (props) => {
     restaurantDetail,
     user,
     address,
-    filteredRestaurants,
   };
   const setters = {
     setRestaurants,
     setRestaurantDetail,
     setUser,
     setAddress,
-    setFilteredRestaurants,
   };
   const requests = {
     getRestaurants,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { GlobalFeedPageContainer, FeedPageContainer } from "./styled";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import AppBar from "@material-ui/core/AppBar";
@@ -50,26 +50,28 @@ const useStyles = makeStyles((theme) => ({
 const FeedPage = () => {
   const { states, setters, requests } = useContext(GlobalStateContext);
   const [search, setSearch] = useState("");
+  const [restaurantOption, setRestaurantOption] = useState(null);
   const classes = useStyles();
 
-  useEffect(() => {
-    filterRestaurants();
-  }, [search]);
+  const filteredRestaurants = useMemo(() => {
+    let newRestaurantsList = states.restaurants.filter((restaurant) => {
+      const restaurantName = restaurant.name.toLowerCase();
+      const searchText = search.toLocaleLowerCase();
+      return restaurantName.startsWith(searchText);
+    });
+    if (restaurantOption != null) {
+      newRestaurantsList = newRestaurantsList.filter((restaurant) => {
+        return restaurant.category == restaurantOption;
+      });
+    }
+    return newRestaurantsList;
+  }, [search, states.restaurants, restaurantOption]);
 
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
 
-  const filterRestaurants = () => {
-    const newRestaurantsList = states.restaurants.filter((restaurant) => {
-      const restaurantName = restaurant.name.toLowerCase();
-      const searchText = search.toLocaleLowerCase();
-      return restaurantName.startsWith(searchText);
-    });
-    setters.setFilteredRestaurants(newRestaurantsList);
-  };
-
-  const restaurantsComponents = states.filteredRestaurants.map((restaurant) => {
+  const restaurantsComponents = filteredRestaurants.map((restaurant) => {
     return <RestaurantCard restaurant={restaurant} />;
   });
 
@@ -77,7 +79,10 @@ const FeedPage = () => {
     <GlobalFeedPageContainer>
       <FeedPageContainer>
         <FeedFilter handleSearch={handleSearch} search={search} />
-        <RestaurantsOptions />
+        <RestaurantsOptions
+          setRestaurantOption={setRestaurantOption}
+          restaurantOption={restaurantOption}
+        />
         {restaurantsComponents}
         <div className={classes.sectionBar}>
           <AppBar position="static" color="black">

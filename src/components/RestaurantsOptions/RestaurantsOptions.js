@@ -12,18 +12,34 @@ const OptionsContainer = styled.div`
   gap: 20px;
 `;
 
-function RestaurantsOptions() {
+const options = [
+  "Árabe",
+  "Asiática",
+  "Hamburguer",
+  "Italiana",
+  "Sorvetes",
+  "Carnes",
+  "Baiana",
+  "Petiscos",
+  "Mexicana",
+];
+
+function RestaurantsOptions(props) {
   return (
     <OptionsContainer>
-      <button>Árabe</button>
-      <button>Asiática</button>
-      <button>Hamburguer</button>
-      <button>Italiana</button>
-      <button>Sorvetes</button>
-      <button>Carnes</button>
-      <button>Baiana</button>
-      <button>Petiscos</button>
-      <button>Mexicana</button>
+      {options.map((option) => {
+        return (
+          <button
+            onClick={() =>
+              props.setRestaurantOption(
+                option == props.restaurantOption ? null : option
+              )
+            }
+          >
+            {option}
+          </button>
+        );
+      })}
     </OptionsContainer>
   );
 }
