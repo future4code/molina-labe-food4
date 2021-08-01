@@ -10,7 +10,7 @@ export const GlobalFeedPageContainer = styled.div`
 export const FeedPageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 98vw;
   justify-content: center;
   align-items: center;
   gap: 20px;

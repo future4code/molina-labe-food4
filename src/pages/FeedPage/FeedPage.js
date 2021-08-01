@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { GlobalFeedPageContainer, FeedPageContainer } from "./styled";
 import RestaurantCard from "../../components/RestaurantCard/RestaurantCard";
 import AppBar from "@material-ui/core/AppBar";
@@ -7,18 +7,13 @@ import IconButton from "@material-ui/core/IconButton";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import HomeIcon from "@material-ui/icons/Home";
 import PersonIcon from "@material-ui/icons/Person";
-import useProtectedPage from "../../hooks/useProtectedPage";
-import { alpha, makeStyles } from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
-import SearchIcon from "@material-ui/icons/Search";
+
+import { makeStyles } from "@material-ui/core/styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
+import FeedFilter from "../../components/FeedFilter/FeedFilter";
+import RestaurantsOptions from "../../components/RestaurantsOptions/RestaurantsOptions";
 
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
-    width: 320,
-    marginTop: 10,
-  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
@@ -26,43 +21,6 @@ const useStyles = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block",
-    },
-  },
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
-    width: 800,
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing(3),
-      width: "auto",
-    },
-  },
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
     },
   },
   sectionDesktop: {
@@ -90,43 +48,83 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FeedPage = () => {
-
-  useProtectedPage()
-
-  const { states, requests } = useContext(GlobalStateContext);
+  const { states, setters, requests } = useContext(GlobalStateContext);
+  const [search, setSearch] = useState("");
+  // const [filteredRestaurantsList, setFilteredRestaurantsList] = useState([]);
+  // const [section, setSection] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
-    requests.getRestaurants();
-  }, []);
+    // requests.getRestaurants();
+    filterRestaurants();
+    // changeSection();
+  }, [search]);
+
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+  // const changeSection = () => {
+  //   if (filteredRestaurantsList === []) {
+  //     setFilteredRestaurantsList(states.restaurants);
+  //   } else {
+  //     return filteredRestaurantsList;
+  //   }
+  // };
+
+  // const renderFeedPage = () => {
+  //   switch (filteredRestaurantsList) {
+  //     case []:
+  //       return states.restaurants.map((restaurant) => {
+  //         return <RestaurantCard restaurant={restaurant} />;
+  //       });
+  //     case [search]:
+  //       return filteredRestaurantsList.map((restaurant) => {
+  //         return <RestaurantCard restaurant={restaurant} />;
+  //       });
+  //   }
+  // };
+
+  // const filterRestaurants = () => {
+  //   const newRestaurantsList = states.restaurants.filter((restaurant) => {
+  //     const restaurantName = restaurant.name.toLowerCase();
+  //     const searchText = search.toLocaleLowerCase();
+  //     return search ? restaurantName.startsWith(searchText) : true;
+  //   });
+
+  //   setters.setFilteredRestaurants(newRestaurantsList);
+  // };
+
+  // const getFilteredRestaurants = () => {
+  //   return states.filteredRestaurants
+  //     .filter((restaurant) =>
+  //       search ? restaurant.name.startsWith(search) : true
+  //     )
+  //     .map((restaurant) => {
+  //       return restaurantName.startsWith(searchText);
+  //     });
+  // };
+
+  // const NewRestaurantsList = getFilteredRestaurants();
+  const filterRestaurants = () => {
+    const newRestaurantsList = states.restaurants.filter((restaurant) => {
+      const restaurantName = restaurant.name.toLowerCase();
+      const searchText = search.toLocaleLowerCase();
+      return restaurantName.startsWith(searchText);
+    });
+    setters.setFilteredRestaurants(newRestaurantsList);
+  };
+
+  const restaurantsComponents = states.filteredRestaurants.map((restaurant) => {
+    return <RestaurantCard restaurant={restaurant} />;
+  });
 
   return (
     <GlobalFeedPageContainer>
       <FeedPageContainer>
-        <div className={classes.grow}>
-          <AppBar position="static" color="#B8B8B8">
-            <Toolbar>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Restaurante"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ "aria-label": "search" }}
-                />
-              </div>
-              <div className={classes.grow} />
-            </Toolbar>
-          </AppBar>
-        </div>
-        {states.restaurants &&
-          states.restaurants.map((restaurant) => {
-            return <RestaurantCard restaurant={restaurant} />;
-          })}
+        <FeedFilter handleSearch={handleSearch} search={search} />
+        <RestaurantsOptions />
+        {restaurantsComponents}
         <div className={classes.sectionBar}>
           <AppBar position="static" color="black">
             <Toolbar>

@@ -13,6 +13,7 @@ const styles = {
     minWidth: 320,
     maxWidth: 450,
     minHeight: 180,
+    margin: 10,
   },
   media: {
     height: 130,
@@ -27,21 +28,21 @@ const RestaurantCard = (props) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={props.restaurant.logoUrl}
+          image={
+            "https://lh3.googleusercontent.com/proxy/ynRX-iPawQjNSBcBBvBvElOz5t42J6EG2NA8daolVT5PqwoewFPwwJ9TFY2YCNmlSxFmGrIpztSWEtL71UuoK3amTix8pOVYW9Es9Phxhc9170QmI0Xlpi2hEsc9rtqupi4oyvY"
+          }
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="h3">
-            {props.restaurant.name}
+            Name
           </Typography>
+          <Typography component="p">Categoria</Typography>
           <TimeDeliveryContainer>
-            <Typography component="p">
-              {props.restaurant.deliveryTime} min
-            </Typography>
-            <Typography component="p">
-              Frete R${props.restaurant.shipping},00
-            </Typography>
+            <Typography component="p">Frete</Typography>
+            <Typography component="p">Time</Typography>
           </TimeDeliveryContainer>
+          <Typography component="p">Endereço</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
