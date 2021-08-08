@@ -7,7 +7,7 @@ import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import RestaurantPage from "../pages/RestaurantsPage/RestaurantPage";
 import ProfilePageUser from "../pages/ProfilePage/ProfilePageUser";
 import ProfilePageAddress from "../pages/ProfilePage/ProfilePageAddress";
-import CartPage from "../pages/CartPage.js/CartPage";
+import CartPage from "../pages/CartPage/CartPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import HomePage from "../pages/HomePage/HomePage";
 import SignUpAddressPage from "../pages/SignUpAddressPage/SignUpAddressPage";
@@ -36,7 +36,7 @@ const Router = () => {
           <FeedPage />
         </Route>
 
-        <Route exact path={"/restaurantes"}>
+        <Route exact path={"/restaurantes/:id"}>
           <RestaurantPage />
         </Route>
 

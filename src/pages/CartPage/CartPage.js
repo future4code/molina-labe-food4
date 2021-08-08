@@ -1,5 +1,5 @@
 import React from "react";
-import RestaurantProductsCard from "../../components/RestaurantProductsCard/RestaurantProductsCard";
+import RestaurantMainMenuCard from "../../components/RestaurantProductsCard/RestaurantMainMenuCard";
 import { Header, Title } from "../../components/ProfileCard/styledProfile";
 
 import {
@@ -60,8 +60,8 @@ const CartPage = () => {
           <PLine>Tempo de entrega</PLine>
         </RestaurantDataContainer>
         <MenuContainer>
-          <RestaurantProductsCard />
-          <RestaurantProductsCard />
+          <RestaurantMainMenuCard />
+          <RestaurantMainMenuCard />
         </MenuContainer>
         <DeliveryPriceContainer>
           <PLine>Preço do Frete</PLine>

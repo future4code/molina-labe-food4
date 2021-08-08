@@ -7,7 +7,7 @@ import {
   AddButton,
 } from "./styled";
 
-const RestaurantProductsCard = (props) => {
+const RestaurantSideDishCard = (props) => {
   return (
     <RestaurantDetailContainer>
       <RestaurantCard>
@@ -29,4 +29,4 @@ const RestaurantProductsCard = (props) => {
   );
 };
 
-export default RestaurantProductsCard;
+export default RestaurantSideDishCard;

@@ -23,7 +23,7 @@ const RestaurantCard = (props) => {
   const { classes } = props;
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} onClick={props.onClick}>
       <CardActionArea>
         <CardMedia
           className={classes.media}

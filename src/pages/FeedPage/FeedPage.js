@@ -12,6 +12,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import FeedFilter from "../../components/FeedFilter/FeedFilter";
 import RestaurantsOptions from "../../components/RestaurantsOptions/RestaurantsOptions";
+import { goToRestaurant } from "../../routes/Cordinator";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -48,10 +50,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FeedPage = () => {
-  const { states, setters, requests } = useContext(GlobalStateContext);
+  const { states } = useContext(GlobalStateContext);
   const [search, setSearch] = useState("");
   const [restaurantOption, setRestaurantOption] = useState(null);
   const classes = useStyles();
+  const history = useHistory();
 
   const filteredRestaurants = useMemo(() => {
     let newRestaurantsList = states.restaurants.filter((restaurant) => {
@@ -71,8 +74,17 @@ const FeedPage = () => {
     setSearch(event.target.value);
   };
 
+  const onClickRestaurant = (id) => {
+    goToRestaurant(history, id);
+  };
+
   const restaurantsComponents = filteredRestaurants.map((restaurant) => {
-    return <RestaurantCard restaurant={restaurant} />;
+    return (
+      <RestaurantCard
+        restaurant={restaurant}
+        onClick={() => onClickRestaurant(restaurant.id)}
+      />
+    );
   });
 
   return (

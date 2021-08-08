@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BASE_URL, headers } from "../constants/urls";
 import GlobalStateContext from "./GlobalStateContext";
+import { useParams } from "react-router-dom";
 
 const GlobalState = (props) => {
   const [restaurants, setRestaurants] = useState([]);
@@ -21,7 +22,7 @@ const GlobalState = (props) => {
       .then((res) => {
         setRestaurants(res.data.restaurants);
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => console.log(error));
   };
 
   const getRestaurantDetail = (id) => {
@@ -31,9 +32,9 @@ const GlobalState = (props) => {
       })
       .then((response) => {
         console.log(response);
-        setRestaurantDetail(response.restaurant.products);
+        setRestaurantDetail(response.data.restaurant);
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => console.log(error));
   };
 
   const getFullAddress = () => {
