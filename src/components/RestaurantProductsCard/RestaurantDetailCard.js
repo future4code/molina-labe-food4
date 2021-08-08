@@ -28,21 +28,19 @@ const RestaurantCard = (props) => {
       <CardActionArea>
         <CardMedia
           className={classes.media}
-          image={
-            "https://lh3.googleusercontent.com/proxy/ynRX-iPawQjNSBcBBvBvElOz5t42J6EG2NA8daolVT5PqwoewFPwwJ9TFY2YCNmlSxFmGrIpztSWEtL71UuoK3amTix8pOVYW9Es9Phxhc9170QmI0Xlpi2hEsc9rtqupi4oyvY"
-          }
+          image={props.image}
           title="Contemplative Reptile"
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="h3">
-            Name
+            {props.name}
           </Typography>
-          <Typography component="p">Categoria</Typography>
+          <Typography component="p">{props.category}</Typography>
           <TimeDeliveryContainer>
-            <Typography component="p">Frete</Typography>
-            <Typography component="p">Time</Typography>
+            <Typography component="p">{props.deliveryTime} min</Typography>
+            <Typography component="p">Frete: R${props.shipping},00</Typography>
           </TimeDeliveryContainer>
-          <Typography component="p">Endereço</Typography>
+          <Typography component="p">{props.address}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>

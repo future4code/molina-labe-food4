@@ -10,16 +10,16 @@ export const goToSignup = (history) => {
   history.push("/cadastro");
 };
 
-export const goToAddress =(history) => {
-  history.push("/cadastro-endereco")
-}
+export const goToAddress = (history) => {
+  history.push("/cadastro-endereco");
+};
 
 export const goToFeed = (history) => {
   history.push("/feed");
 };
 
-export const goToRestaurant = (history) => {
-  history.push("/restaurantes");
+export const goToRestaurant = (history, id) => {
+  history.push(`/restaurantes/${id}`);
 };
 
 export const goToProfile = (history) => {
@@ -37,4 +37,3 @@ export const goToEditUser = (history) => {
 export const goToCart = (history) => {
   history.push("/carrinho");
 };
-
